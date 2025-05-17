@@ -51,7 +51,7 @@ To create an local instance of CCS, you need:
 - An virtualhost configuration where it's `DocumentRoot` (or `root`) is pointed to the `Frontend` folder.
 - A secondary virtualhost located on the same server that has write permission. (will be used for profile picture CDN)
 
-For the HTTP server, both Apache2 and NGINX should work fine, but take note that if you are using NGINX you will need to covert `.htaccess` rules.
+For the HTTP server, both Apache2 and NGINX should work fine, but take note that if you are using NGINX you will need to convert the `.htaccess` rules.
 
 If you are lazy and don't want to install the dependencies manually, you can use XAMPP or WampServer
 
