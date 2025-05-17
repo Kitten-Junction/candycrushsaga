@@ -1,0 +1,67 @@
+<?php
+include '../Backend/common.php';
+include $modules . '/KingdomAccount.php';
+
+$appId = $env['FB_APP_ID'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['signed_request'])) {
+    $result = handleWebLogin($_POST['signed_request'], $pdo);
+    if ($result['success']) {
+        $sessionKey = urlencode($result['session_key']);
+        header("Location: /fb?_session={$sessionKey}");
+        exit;
+    } else {
+        echo "Error: " . $result['error'];
+    }
+}
+?>
+<!DOCTYPE HTML>
+<html>
+    <body>
+	<div id="fb-root"></div>
+    <form method="POST" action="&#x3f;_retry&#x3d;1">
+      <input type="hidden" name="signed_request">
+      <input type="hidden" name="user" value="e30=">
+    </form>
+
+    <script type="text/javascript">
+        window.fbAsyncInit = function() {
+            FB.init({
+                version    : "v2.9",
+                appId      : <?= json_encode(APP_ID) ?>,
+                status     : true
+            });
+
+            function onLogin(response) {
+                if (response.status == 'connected') {
+                    var signedRequest = response.authResponse.signedRequest;
+                    document.getElementsByTagName("input")[0].value = signedRequest;
+                    document.getElementsByTagName("form")[0].submit();
+                } else if (response.status == 'not_authorized') {
+                    document.getElementsByTagName("form")[0].submit();
+                }
+            }
+
+            FB.getLoginStatus(function(response) {
+                if (response.status == 'connected') {
+                    onLogin(response);
+                } else {
+                    FB.login(function(response) {
+                        onLogin(response);
+                    }, {scope: 'public_profile,email,user_friends'});
+                }
+            });
+        };
+
+        // Load the SDK Asynchronously
+        (function(d){
+            var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script'); js.id = id; js.async = true;
+            js.src = "https://connect.spiritaccount.net/all.js";
+            ref.parentNode.insertBefore(js, ref);
+        }(document));
+    </script>
+    </body>
+</html>
+
