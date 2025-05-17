@@ -2,6 +2,8 @@
 
 ![Discord](https://img.shields.io/discord/855650531354476554?style=social&logo=discord&link=https%3A%2F%2Fdiscord.gg%2FUTkJ5zE6wX) ![Our Bluesky](https://img.shields.io/badge/Bluesky_Page-brightgreen?style=social&logo=bluesky&link=https%3A%2F%2Fbsky.app%2Fprofile%2Fspiritaccount.net) ![Supported](https://img.shields.io/badge/1.88-brightgreen?style=social&logo=android)
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B114XK6W)
+
 A recreation of the original CCS servers using Spirit Account.
 
 The root of the project contains an pre-patched v1.88 Candy Crush APK pointed to SA CCS servers, use it to do anything you want.
